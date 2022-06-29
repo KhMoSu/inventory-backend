@@ -23,7 +23,12 @@ describe('backend routes', () => {
       user_id: null,
       bought: false,
     });
-  })
+  });
+  it('PUT /api/v1/items modifies an existing item', async () => {
+    const res = await request(app).put('/api/v1/items/1').send({ item: true });
+    expect(res.status).toBe(200);
+    expect(res.body.bought).toEqual(true);
+  });
 
   afterAll(() => {
     pool.end();

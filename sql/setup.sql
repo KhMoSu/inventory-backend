@@ -9,3 +9,11 @@ CREATE TABLE items (
     user_id BIGINT,
     amount INT NOT NULL
 );
+
+INSERT INTO items(
+    item,
+    amount,
+    bought
+)
+VALUES 
+('bread', '5', false);
