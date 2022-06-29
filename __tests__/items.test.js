@@ -3,13 +3,16 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-describe('backend-express-template routes', () => {
+describe('backend routes', () => {
   beforeEach(() => {
     return setup(pool);
   });
-  it('example test - delete me!', () => {
-    expect(1).toEqual(1);
+
+  it('GET /api/v1/items lists all items for authenticated users', async () => {
+    const resp = await request(app).get('/api/v1/items');
+    expect(resp.status).toEqual(200);
   });
+
   afterAll(() => {
     pool.end();
   });
