@@ -40,6 +40,10 @@ describe('backend routes', () => {
       .put('/api/v1/items/1')
       .send({ item: 'bananas', amount: 13 });
     expect(createRes.status).toEqual(200);
+    const res = await request(app).delete('/api/v1/items/1');
+    expect(res.status).toEqual(200);
+    const { body } = await request(app).get('/api/v1/items/1');
+    expect(body.status).toEqual(404);
   });
 
   afterAll(() => {
