@@ -14,7 +14,9 @@ describe('backend routes', () => {
   });
 
   it('POST /api/v1/items creates a new item', async () => {
-    const resp = await request(app).post('/api/v1/items').send({ item: 'apples', amount: 4 }); 
+    const resp = await request(app)
+      .post('/api/v1/items')
+      .send({ item: 'apples', amount: 4 });
     expect(resp.status).toEqual(200);
     expect(resp.body).toEqual({
       id: expect.any(String),
@@ -24,10 +26,20 @@ describe('backend routes', () => {
       bought: false,
     });
   });
+
   it('PUT /api/v1/items modifies an existing item', async () => {
-    const res = await request(app).put('/api/v1/items/1').send({ item: true });
+    const res = await request(app)
+      .put('/api/v1/items/1')
+      .send({ bought: true });
     expect(res.status).toBe(200);
     expect(res.body.bought).toEqual(true);
+  });
+
+  it('DELETE /api/v1/items/:id deletes item associated with authenticated user', async () => {
+    const createRes = await request(app)
+      .put('/api/v1/items/1')
+      .send({ item: 'bananas', amount: 13 });
+    expect(createRes.status).toEqual(200);
   });
 
   afterAll(() => {
