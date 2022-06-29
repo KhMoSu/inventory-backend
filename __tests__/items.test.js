@@ -13,6 +13,18 @@ describe('backend routes', () => {
     expect(resp.status).toEqual(200);
   });
 
+  it('POST /api/v1/items creates a new item', async () => {
+    const resp = await request(app).post('/api/v1/items').send({ item: 'apples', amount: 4 }); 
+    expect(resp.status).toEqual(200);
+    expect(resp.body).toEqual({
+      id: expect.any(String),
+      item: 'apples',
+      amount: 4,
+      user_id: null,
+      bought: false,
+    });
+  })
+
   afterAll(() => {
     pool.end();
   });
