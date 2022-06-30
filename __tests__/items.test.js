@@ -13,6 +13,12 @@ describe('backend routes', () => {
     expect(resp.status).toEqual(200);
   });
 
+  it('GET /api/v1/items/:id list of item for an existing user', async () => {
+    const resp = await request(app).get('/api/v1/items/1');
+    expect(resp.status).toEqual(200);
+    expect(resp.body.item).toEqual('bread');
+  });
+
   it('POST /api/v1/items creates a new item', async () => {
     const resp = await request(app)
       .post('/api/v1/items')

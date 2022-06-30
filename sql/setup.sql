@@ -16,4 +16,5 @@ INSERT INTO items(
     bought
 )
 VALUES 
-('bread', '5', false);
+('bread', '5', false),
+('apples', '2', true);
